@@ -14,29 +14,37 @@ app.get('/',  (req, res) => {
     res.sendFile(__dirname + "/index.html");
 });
 
-const nps = io.of("/home");
+/*const nps = io.of("/home");
 nps.on('connection', (socket) =>{
     nps.emit('message', 'Hello, you are connected to the Home server!');
-});
+});*/
 
 io.on('connection', (socket) => {
     console.log('A user connected');
 
-    socket.on("Myevent" , (msg) =>{
+    // Rooms    
+    socket.join("hall-room");
+    let sizeOfhall = io.sockets.adapter.rooms.get("hall-room").size;
+    io.to("hall-room").emit("sleeping" , "Do not disturb!!= " +sizeOfhall);
+
+    socket.join("kitchen-room");
+    io.to("kitchen-room").emit("cooking" , "Food is cooking!!");
+
+    /*socket.on("Myevent" , (msg) =>{
         console.log(msg);
     })
 
   /* setInterval(()=>{
         let d = new Date();
         let t = d.getTime()
-        socket.emit("Myevent" ,t);
+        socket.emit("Myevent" ,t); 
     }, 20000); */
 
     /*setTimeout(() =>{
         socket.send("Server-->Client(connection).")
     }, 10000) */
 
-    socket.emit('message', 'Hello, you are connected to the server!');
+   //  socket.emit('message', 'Hello, you are connected to the server!');
 
    // socket.on('clientMessage', (message) => {
    //     console.log('Received message from client:', message);

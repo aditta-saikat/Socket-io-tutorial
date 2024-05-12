@@ -15,6 +15,14 @@
     <script src="/socket.io/socket.io.js"></script>
 
     <script>
+        const socket = io();
+
+        socket.on("sleeping" , (data) => {
+            document.getElementById("abc").innerHTML = data;
+        })
+
+        /*
+        // Namspace
         const socket = io("/home");
 
         socket.on("message", (data)=>{
