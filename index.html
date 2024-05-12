@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket io</title>
+</head>
+<body>
+    <h1 id="abc"></h1>
+    <!-- <h1 id="time"> </h1> --> 
+
+    <!-- <input type="text" id="name" />
+    <button onclick="send()" id="send">Send</button> -->
+
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script>
+        const socket = io("/home");
+
+        socket.on("message", (data)=>{
+            document.getElementById('abc').innerHTML = data;
+        })
+
+        /*function send(){
+            const name = document.getElementById("name").value;
+            
+            socket.emit("Myevent" , name);
+        }*/
+
+        /*socket.on('Myevent' , (msg)=>{
+            document.getElementById("time").innerHTML = "";
+            document.getElementById("time").innerHTML = msg;
+        })*/
+        
+    </script>
+</body>
+</html>
